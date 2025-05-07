@@ -93,34 +93,35 @@ public class CarMovement : MonoBehaviour
     }
 
     // Movimiento físico del coche
-    void Move()
+   void Move()
     {
         // Calcula la velocidad actual en el plano XZ (ignora la Y)
-        Vector3 flatVelocity = rb.linearVelocity ;
+        Vector3 flatVelocity = rb.linearVelocity;
         flatVelocity.y = 0;
 
-        // Solo acelera si no ha alcanzado la velocidad máxima
-        if (flatVelocity.magnitude < maxSpeed)
+        // Convierte la velocidad a km/h
+        float speedKmh = flatVelocity.magnitude * 3.6f;
+
+        // Solo acelera si no ha alcanzado la velocidad máxima (en km/h)
+        if (speedKmh < maxSpeed)
         {
             // Aceleración hacia adelante
             if (verticalInput > 0)
-            {
                 rb.AddForce(transform.forward * verticalInput * acceleration * Time.fixedDeltaTime, ForceMode.Acceleration);
-            }
+
             // Frenado (hacia atrás)
             else if (verticalInput < 0)
-            {
                 rb.AddForce(transform.forward * verticalInput * brakeForce * Time.fixedDeltaTime, ForceMode.Acceleration);
-            }
         }
 
         // Gira el coche solo si se está moviendo
         if (Mathf.Abs(flatVelocity.magnitude) > 0.5f)
         {
             // Calcula el ángulo de giro, teniendo en cuenta la dirección del movimiento
-            float steer = horizontalInput * turnSpeed * Time.fixedDeltaTime * Mathf.Sign(Vector3.Dot(rb.linearVelocity , transform.forward));
+            float steer = horizontalInput * turnSpeed * Time.fixedDeltaTime * Mathf.Sign(Vector3.Dot(rb.linearVelocity, transform.forward));
             Quaternion turnRotation = Quaternion.Euler(0f, steer, 0f);
             rb.MoveRotation(rb.rotation * turnRotation);
         }
     }
+
 }
