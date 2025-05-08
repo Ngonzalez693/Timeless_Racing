@@ -3,7 +3,7 @@
 
 **Timeless Racing** is a racing video game developed with Unity.
 
-## 🎮 Develop by Drifting Minds Studios
+## 🎮 Development by Drifting Minds Studios
 
 ## 🧰 Technologies Used
 
