@@ -34573,6 +34573,8 @@ MonoBehaviour:
   - {fileID: 1850318643}
   totalWaypoints: 31
   raceFinished: 0
+  raceTime: 0
+  timerRunning: 0
   racerInfos:
   - racerObject: {fileID: 997846152}
     currentLap: 0
@@ -36314,6 +36316,7 @@ MonoBehaviour:
   speedText: {fileID: 1738271703}
   positionText: {fileID: 135101997}
   lapText: {fileID: 177861037}
+  timeText: {fileID: 1169453630}
 --- !u!1 &1926788725 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3702203306636082739, guid: 36cf710c62139174b8d1a640992bc142, type: 3}

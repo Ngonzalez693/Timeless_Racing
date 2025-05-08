@@ -15,6 +15,7 @@ public class RaceHUD : MonoBehaviour
     [Header("Información de Carrera")]
     public TextMeshProUGUI positionText;
     public TextMeshProUGUI lapText;
+    public TextMeshProUGUI timeText;
     private RaceManager raceManager;
 
     [System.Obsolete]
@@ -56,6 +57,10 @@ public class RaceHUD : MonoBehaviour
                 }
             }
         }
+
+        // Mostrar tiempo
+        if (timeText != null)
+            timeText.text = FormatRaceTime(raceManager.raceTime);
     }
     
     // Método para obtener el sufijo correcto (1ro, 2do, 3ro, etc.)
@@ -68,5 +73,13 @@ public class RaceHUD : MonoBehaviour
             case 3: return "ro";
             default: return "to";
         }
+    }
+
+    private string FormatRaceTime(float t)
+    {
+        int minutes = (int)(t / 60);
+        int seconds = (int)(t % 60);
+        int centiseconds = (int)((t - minutes * 60 - seconds) * 100);
+        return $"{minutes:00}:{seconds:00}:{centiseconds:00}";
     }
 }

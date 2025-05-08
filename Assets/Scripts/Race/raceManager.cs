@@ -9,6 +9,9 @@ public class RaceManager : MonoBehaviour
     public int totalWaypoints = 31; // Cambia este valor si tienes más/menos waypoints
     public bool raceFinished = false;
 
+    public float raceTime = 0f;
+    public bool timerRunning = false;
+
     // Info de cada corredor
     [System.Serializable]
     public class RacerInfo
@@ -39,10 +42,15 @@ public class RaceManager : MonoBehaviour
     void Start()
     {
         InitializeRace();
+        raceTime = 0f;
+        timerRunning = true;
     }
 
     void Update()
     {
+        if (timerRunning && !raceFinished)
+            raceTime += Time.deltaTime;
+
         CalculatePositions();
     }
 
@@ -88,7 +96,8 @@ public class RaceManager : MonoBehaviour
     private void OnPlayerFinishRace()
     {
         Debug.Log("¡Carrera terminada!");
-        
+        timerRunning = false; // Detiene el tiempo
+
         var playerInfo = GetPlayerInfo();
         if (playerInfo != null)
         {
