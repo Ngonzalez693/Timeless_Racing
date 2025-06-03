@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuSystem : MonoBehaviour
 {
    public void Play(){
-    SceneManager.LoadScene("Test_Race_1");
+    SceneManager.LoadScene("Custom_Car");
    }
 
    public void Exit(){

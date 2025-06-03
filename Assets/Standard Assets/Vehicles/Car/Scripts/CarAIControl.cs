@@ -61,6 +61,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
         private void FixedUpdate()
         {
+
             if (m_Target == null || !m_Driving)
             {
                 // Car should not be moving,
@@ -70,7 +71,7 @@ namespace UnityStandardAssets.Vehicles.Car
             else
             {
                 Vector3 fwd = transform.forward;
-                if (m_Rigidbody.linearVelocity.magnitude > m_CarController.MaxSpeed*0.1f)
+                if (m_Rigidbody.linearVelocity.magnitude > m_CarController.MaxSpeed * 0.1f)
                 {
                     fwd = m_Rigidbody.linearVelocity;
                 }
@@ -88,13 +89,13 @@ namespace UnityStandardAssets.Vehicles.Car
                             float approachingCornerAngle = Vector3.Angle(m_Target.forward, fwd);
 
                             // also consider the current amount we're turning, multiplied up and then compared in the same way as an upcoming corner angle
-                            float spinningAngle = m_Rigidbody.angularVelocity.magnitude*m_CautiousAngularVelocityFactor;
+                            float spinningAngle = m_Rigidbody.angularVelocity.magnitude * m_CautiousAngularVelocityFactor;
 
                             // if it's different to our current angle, we need to be cautious (i.e. slow down) a certain amount
                             float cautiousnessRequired = Mathf.InverseLerp(0, m_CautiousMaxAngle,
                                                                            Mathf.Max(spinningAngle,
                                                                                      approachingCornerAngle));
-                            desiredSpeed = Mathf.Lerp(m_CarController.MaxSpeed, m_CarController.MaxSpeed*m_CautiousSpeedFactor,
+                            desiredSpeed = Mathf.Lerp(m_CarController.MaxSpeed, m_CarController.MaxSpeed * m_CautiousSpeedFactor,
                                                       cautiousnessRequired);
                             break;
                         }
@@ -109,12 +110,12 @@ namespace UnityStandardAssets.Vehicles.Car
                             float distanceCautiousFactor = Mathf.InverseLerp(m_CautiousMaxDistance, 0, delta.magnitude);
 
                             // also consider the current amount we're turning, multiplied up and then compared in the same way as an upcoming corner angle
-                            float spinningAngle = m_Rigidbody.angularVelocity.magnitude*m_CautiousAngularVelocityFactor;
+                            float spinningAngle = m_Rigidbody.angularVelocity.magnitude * m_CautiousAngularVelocityFactor;
 
                             // if it's different to our current angle, we need to be cautious (i.e. slow down) a certain amount
                             float cautiousnessRequired = Mathf.Max(
                                 Mathf.InverseLerp(0, m_CautiousMaxAngle, spinningAngle), distanceCautiousFactor);
-                            desiredSpeed = Mathf.Lerp(m_CarController.MaxSpeed, m_CarController.MaxSpeed*m_CautiousSpeedFactor,
+                            desiredSpeed = Mathf.Lerp(m_CarController.MaxSpeed, m_CarController.MaxSpeed * m_CautiousSpeedFactor,
                                                       cautiousnessRequired);
                             break;
                         }
@@ -135,14 +136,14 @@ namespace UnityStandardAssets.Vehicles.Car
                     desiredSpeed *= m_AvoidOtherCarSlowdown;
 
                     // and veer towards the side of our path-to-target that is away from the other car
-                    offsetTargetPos += m_Target.right*m_AvoidPathOffset;
+                    offsetTargetPos += m_Target.right * m_AvoidPathOffset;
                 }
                 else
                 {
                     // no need for evasive action, we can just wander across the path-to-target in a random way,
                     // which can help prevent AI from seeming too uniform and robotic in their driving
-                    offsetTargetPos += m_Target.right*
-                                       (Mathf.PerlinNoise(Time.time*m_LateralWanderSpeed, m_RandomPerlin)*2 - 1)*
+                    offsetTargetPos += m_Target.right *
+                                       (Mathf.PerlinNoise(Time.time * m_LateralWanderSpeed, m_RandomPerlin) * 2 - 1) *
                                        m_LateralWanderDistance;
                 }
 
@@ -152,21 +153,21 @@ namespace UnityStandardAssets.Vehicles.Car
                                                   : m_AccelSensitivity;
 
                 // decide the actual amount of accel/brake input to achieve desired speed.
-                float accel = Mathf.Clamp((desiredSpeed - m_CarController.CurrentSpeed)*accelBrakeSensitivity, -1, 1);
+                float accel = Mathf.Clamp((desiredSpeed - m_CarController.CurrentSpeed) * accelBrakeSensitivity, -1, 1);
 
                 // add acceleration 'wander', which also prevents AI from seeming too uniform and robotic in their driving
                 // i.e. increasing the accel wander amount can introduce jostling and bumps between AI cars in a race
                 accel *= (1 - m_AccelWanderAmount) +
-                         (Mathf.PerlinNoise(Time.time*m_AccelWanderSpeed, m_RandomPerlin)*m_AccelWanderAmount);
+                         (Mathf.PerlinNoise(Time.time * m_AccelWanderSpeed, m_RandomPerlin) * m_AccelWanderAmount);
 
                 // calculate the local-relative position of the target, to steer towards
                 Vector3 localTarget = transform.InverseTransformPoint(offsetTargetPos);
 
                 // work out the local angle towards the target
-                float targetAngle = Mathf.Atan2(localTarget.x, localTarget.z)*Mathf.Rad2Deg;
+                float targetAngle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
 
                 // get the amount of steering needed to aim the car towards the target
-                float steer = Mathf.Clamp(targetAngle*m_SteerSensitivity, -1, 1)*Mathf.Sign(m_CarController.CurrentSpeed);
+                float steer = Mathf.Clamp(targetAngle * m_SteerSensitivity, -1, 1) * Mathf.Sign(m_CarController.CurrentSpeed);
 
                 // feed input to the car controller.
                 m_CarController.Move(steer, accel, accel, 0f);
