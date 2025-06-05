@@ -22,7 +22,7 @@ public class CountdownController : MonoBehaviour
 
     private IEnumerator StartCountdown()
     {
-        // Desactivar controles o IA
+        // Unable controls or AI
         foreach (var script in controlScriptsToDisable)
         {
             script.enabled = false;
@@ -39,7 +39,7 @@ public class CountdownController : MonoBehaviour
         countdownText.text = "GO!";
         OnRaceStart?.Invoke();
 
-        // Activar controles o IA
+        // Enable controls or AI
         foreach (var script in controlScriptsToDisable)
         {
             script.enabled = true;

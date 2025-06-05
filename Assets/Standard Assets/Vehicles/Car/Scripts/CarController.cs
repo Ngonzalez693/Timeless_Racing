@@ -59,6 +59,14 @@ namespace UnityStandardAssets.Vehicles.Car
         // Use this for initialization
         private void Start()
         {
+            if (gameObject.CompareTag("Player"))
+            {
+                m_Topspeed = CarSettings.topSpeed;
+                m_FullTorqueOverAllWheels = 3000f * CarSettings.acceleration;
+                m_BrakeTorque = 20000f * CarSettings.brakeForce;
+
+            }
+
             m_WheelMeshLocalRotations = new Quaternion[4];
             for (int i = 0; i < 4; i++)
             {

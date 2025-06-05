@@ -62,17 +62,17 @@ public class LapCounter : MonoBehaviour
 
                 timerController.StopTimer();
 
-                // Reportar resultado al RaceManager
+                // Report result to RaceManager
                 float playerTime = timerController.GetElapsedTime();
                 RaceManager.Instance.AddResult(carName, playerTime);
 
-                // Desactivar controles o IA
+                // Unable controls o AI
                 foreach (var script in controlScriptsToDisable)
                 {
                     script.enabled = false;
                 }
 
-                raceStarted = false; // Para evitar contar más vueltas
+                raceStarted = false; // To not count more laps
             }
             else
             {
@@ -103,5 +103,4 @@ public class LapCounter : MonoBehaviour
             return timerController.GetElapsedTime();
         return 0f;
     }
-
 }
