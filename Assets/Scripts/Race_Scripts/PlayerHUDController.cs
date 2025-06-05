@@ -4,16 +4,16 @@ using TMPro;
 public class PlayerHUDController : MonoBehaviour
 {
     [Header("Referencias UI")]
-    [SerializeField] private RectTransform needleTransform;  // Aguja del velocímetro
-    [SerializeField] private TMP_Text speedText;              // Texto de velocidad
+    [SerializeField] private RectTransform needleTransform;     // Aguja del velocímetro
+    [SerializeField] private TMP_Text speedText;                // Texto de velocidad
 
     [Header("Configuración aguja")]
-    [SerializeField] private float minAngle = 0f;           // Ángulo mínimo (velocidad 0)
-    [SerializeField] private float maxAngle = -130f;           // Ángulo máximo (velocidad máxima)
-    [SerializeField] private float maxSpeed = 200f;           // Velocidad máxima esperada (km/h)
+    [SerializeField] private float minAngle = 0f;               // Ángulo mínimo (velocidad 0)
+    [SerializeField] private float maxAngle = -130f;            // Ángulo máximo (velocidad máxima)
+    [SerializeField] private float maxSpeed = 200f;             // Velocidad máxima esperada (km/h)
 
     [Header("Referencia al vehículo")]
-    [SerializeField] private Rigidbody playerRigidbody;       // Rigidbody del vehículo del jugador
+    [SerializeField] private Rigidbody playerRigidbody;         // Rigidbody del vehículo del jugador
 
     private void Update()
     {
