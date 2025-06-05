@@ -3,12 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class MenuSystem : MonoBehaviour
 {
-   public void Play(){
-    SceneManager.LoadScene("Custom_Car");
+
+   public AudioSource audioSource;
+   public AudioClip playSound;
+   public AudioClip quitSound;
+
+   public void Play()
+   {
+      audioSource.PlayOneShot(playSound);
+      SceneManager.LoadScene("Custom_Car");
    }
 
-   public void Exit(){
-    Debug.Log("Saliendo del juego...");
-    Application.Quit();
+   public void Exit()
+   {
+      audioSource.PlayOneShot(quitSound);
+      Debug.Log("Saliendo del juego...");
+      Application.Quit();
    }
 }

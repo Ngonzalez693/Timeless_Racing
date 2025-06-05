@@ -9,6 +9,9 @@ public class OptionsAndFinal : MonoBehaviour
     [SerializeField] private GameObject optionsPanel;       // finish panel
     private bool isOptionsOpen = false;
 
+    public AudioSource audioSource;
+    public AudioClip optionsSound;
+
     private void Update()
     {
 
@@ -21,6 +24,8 @@ public class OptionsAndFinal : MonoBehaviour
 
     private void ToggleOptions()
     {
+        audioSource.PlayOneShot(optionsSound);
+
         if (isOptionsOpen == false)
         {
             HUDPanel.SetActive(false);
@@ -37,6 +42,8 @@ public class OptionsAndFinal : MonoBehaviour
 
     public void CloseScoreboard()
     {
+        audioSource.PlayOneShot(optionsSound);
+        
         scoreboardPanel.SetActive(false);
         finishPanel.SetActive(true);
     }

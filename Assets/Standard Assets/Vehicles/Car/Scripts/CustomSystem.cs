@@ -13,6 +13,10 @@ public class CustomSystem : MonoBehaviour
 
     public bool fastAcceleration = false;               // Is in fast acceleration mode on (true, yes - false, no)
 
+    public AudioSource audioSource;
+    public AudioClip returnSound;
+    public AudioClip playSound;
+
     private void Start()
     {
         UpdateSpeedText(speedSlider.value);
@@ -33,6 +37,8 @@ public class CustomSystem : MonoBehaviour
     }
     public void Continue()
     {
+        audioSource.PlayOneShot(playSound);
+
         // Save values in Static class
         CarSettings.topSpeed = speedSlider.value;
         CarSettings.acceleration = fastAcceleration ? 2f : 1f;
@@ -43,12 +49,14 @@ public class CustomSystem : MonoBehaviour
 
     public void ToggleAccelerationMode()
     {
+        audioSource.PlayOneShot(playSound);
         fastAcceleration = !fastAcceleration;
         accelerationModeText.text = fastAcceleration ? "Aceleracion: Rapida" : "Aceleracion: Normal";
     }
 
     public void Return()
     {
+        audioSource.PlayOneShot(returnSound);
         SceneManager.LoadScene("Main_Menu");
     }
 }

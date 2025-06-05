@@ -29,6 +29,9 @@ public class RaceManager : MonoBehaviour
     private int finishedParticipants = 0;                   // Number of participants finished
     private bool raceFinished = false;                      // Is the race finished (true, yes - false, no)
 
+    public AudioSource audioSource;
+    public AudioClip scoreboardSound;
+
     private void Awake()
     {
         if (Instance == null)
@@ -129,6 +132,8 @@ public class RaceManager : MonoBehaviour
 
     public void ShowScoreboard()
     {
+        audioSource.PlayOneShot(scoreboardSound);
+
         raceFinished = true;
         HUDPanel.SetActive(false);
         scoreboardPanel.SetActive(true);

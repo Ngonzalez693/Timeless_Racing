@@ -8,6 +8,7 @@ public class CountdownController : MonoBehaviour
     [SerializeField] private TMP_Text countdownText;                    // Text object for the countdown
     [SerializeField] private float countdownTime = 3f;                  // Countdown time
     [SerializeField] private MonoBehaviour[] controlScriptsToDisable;   // Scripts to disable (CarUserControl - CarAiControl)
+    [SerializeField] private GameObject instructionsPanel;              // Panel with instructions
 
     [Header("Race HUD")]
     [SerializeField] private GameObject HUDPanel;                       // HUD panel in race
@@ -47,6 +48,7 @@ public class CountdownController : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         HUDPanel.SetActive(true);
+        instructionsPanel.SetActive(false);
         countdownText.gameObject.SetActive(false);
     }
 }
