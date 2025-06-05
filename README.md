@@ -13,7 +13,7 @@
 
 ## 🚀 How to Run the Game
 
-# 🔧 In Editor
+### 🔧 In Editor
 
 1. Clone this repository to your local machine:
    ```bash
@@ -23,7 +23,7 @@
 3. Load the main scene located in `Assets/Scenes/Menu`.
 4. Press the "Play" button to start the game.
 
-# 🏎️ Last Prototype
+### 🏎️ Last Prototype
 
 1. Download `Timeless Racing.zip`.
 2. Decompress the folder.
