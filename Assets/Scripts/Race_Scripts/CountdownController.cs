@@ -4,12 +4,16 @@ using System.Collections;
 
 public class CountdownController : MonoBehaviour
 {
-    [SerializeField] private TMP_Text countdownText;
-    [SerializeField] private float countdownTime = 3f;
-    [SerializeField] private MonoBehaviour[] controlScriptsToDisable;
+    [Header("Game HUD")]
+    [SerializeField] private TMP_Text countdownText;                    // Text object for the countdown
+    [SerializeField] private float countdownTime = 3f;                  // Countdown time
+    [SerializeField] private MonoBehaviour[] controlScriptsToDisable;   // Scripts to disable (CarUserControl - CarAiControl)
 
-    public delegate void RaceStartAction();
-    public static event RaceStartAction OnRaceStart;
+    [Header("Race HUD")]
+    [SerializeField] private GameObject HUDPanel;                       // HUD panel in race
+
+    public delegate void RaceStartAction();                             // Race start event
+    public static event RaceStartAction OnRaceStart;                    // Variable to race start event
 
     private void Start()
     {
@@ -28,6 +32,7 @@ public class CountdownController : MonoBehaviour
         while (timer > 0)
         {
             countdownText.text = Mathf.Ceil(timer).ToString();
+            //Debug.Log(countdownText.text);
             timer -= Time.deltaTime;
             yield return null;
         }
@@ -41,6 +46,7 @@ public class CountdownController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
+        HUDPanel.SetActive(true);
         countdownText.gameObject.SetActive(false);
     }
 }
