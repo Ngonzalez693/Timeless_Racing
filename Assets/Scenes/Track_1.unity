@@ -27780,7 +27780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28abe8b5c0de7f4e87cd5b134029b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalLaps: 1
+  totalLaps: 3
   totalParticipants: 5
   allLapCounters:
   - {fileID: 1841004447}
